@@ -12,8 +12,14 @@ public class HelloWorld {
         app.get("/", ctx -> ctx.result("Hello World"));
         app.get("/users", ctx -> ctx.result("GET /users"));
         app.get("/hello", ctx -> {
-                var name = ctx.queryParam("name");
-                ctx.result("Hello, " + (name != null ? name : "World") + "!");
+            var name = ctx.queryParam("name");
+            ctx.result("Hello, " + (name != null ? name : "World") + "!");
+        });
+        app.get("users/{id}/post/{postId}", ctx -> {
+            var id = ctx.pathParam("id");
+            var postId = ctx.pathParam("postId");
+            ctx.result("Id: " + id);
+            ctx.result("Post Id: " + postId);
         });
         app.post("/users", ctx -> ctx.result("POST /users"));
         app.start(7070); // Стартуем веб-сервер
